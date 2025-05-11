@@ -87,6 +87,52 @@ The minimal performance impacts of feature engineering and model selection sugge
 ![F1 By Genre](images/melissa/6.png)
 ![Table](images/melissa/m1.png)
 
+<table border="1">
+  <tr>
+    <th>Model</th>
+    <th>Feature Selection</th>
+    <th>Features</th>
+    <th>Parameters</th>
+    <th>F1 Score</th>
+  </tr>
+  <tr>
+    <td>Linear SVM</td>
+    <td>f_classif</td>
+    <td>50</td>
+    <td>C = 1.0</td>
+    <td>0.595</td>
+  </tr>
+  <tr>
+    <td>Linear SVM</td>
+    <td>mutual_info_classif</td>
+    <td>70</td>
+    <td>C = 1.0</td>
+    <td>0.589</td>
+  </tr>
+  <tr>
+    <td>RBF SVM</td>
+    <td>f_classif</td>
+    <td>50</td>
+    <td>C = 10.0, gamma = 'scale'</td>
+    <td>0.582</td>
+  </tr>
+  <tr>
+    <td>Random Forest</td>
+    <td>f_classif</td>
+    <td>70</td>
+    <td>N_estimators = 200<br>Max_depth = 20</td>
+    <td>0.571</td>
+  </tr>
+  <tr>
+    <td>Random Forest</td>
+    <td>Mutual_info_classif, f_classif</td>
+    <td>50</td>
+    <td>N_estimators = 100<br>Max_depth = none</td>
+    <td>0.553</td>
+  </tr>
+</table>
+
+
 After applying SVD to the Doc2Vec vectors, we implemented a comprehensive grid search to identify the optimal feature selection method and classification parameters. We explored different model architectures including linear and RBF SVMs as well as Random Forest classifiers. For the SVM models, we experimented with different regularization parameters (C values of .1, 1.0, and 10.0) while for Random Forest, we varied with both the number of estimators (100, 200) and the maximum tree depth (None, 10, and 20). This allowed us to identify that Linear SVM with C = 1.0 and F value feature selection provided the most effective combination. 
 
 Based on the grid search findings, we conducted a focused evaluation of two feature selection methods (F value and Mutual Information) across different feature counts (30, 50, 70, 100). For each combination, we calculated the aggregated feature importance scores across all genre labels to identify the most discriminative components. We found that the F value method with 50 features achieved the highest macro averaged F1 score of 0.5954 across 34 genre categories. The top performing genres included romance, comedy, myster, sci-fi, and horror. Overall, this gave us insight that our combination of a Doc2Vec, SVD, F value selection, and linear SVC pipeline effectively handles multilabel movie genre classification, even across most categories. 
@@ -98,17 +144,34 @@ Upon analyzing the distribution of the genres within the data, it becomes clear 
 
 To compete with the Random Forest model, a Support Vector Machine model was also implemented with the same OneVsRestClassifier model and stratified K-fold technique. Hyperparameters were similarly tuned in accordance with the f1_macro score; these parameters consisted of the C regularization control variable, kernel type, gamma value, class_weight, and the probability boolean. The kernel types were restricted to linear and rbf kernels, avoiding polynomial kernels due to both risks of overfitting and the need for powerful computational resources. Theoretically, the SVM should be less affected by class imbalance in the data due to its dependence on support vectors as opposed to class proportions. The tunability of the C term also allows for regularization control by adjusting the misclassification and decision boundary complexity. 
 
-Random Forest Classifier:
-* Micro F1: 0.5693
-* Macro F1: 0.4873
-* Weighted F1: 0.5471
-* Hamming Loss: 0.2097
+<table border="1">
+  <tr>
+    <th>Metric</th>
+    <th>Random Forest</th>
+    <th>SVM</th>
+  </tr>
+  <tr>
+    <td>Micro F1</td>
+    <td>0.5693</td>
+    <td>0.4908</td>
+  </tr>
+  <tr>
+    <td>Macro F1</td>
+    <td>0.4873</td>
+    <td>0.5719</td>
+  </tr>
+  <tr>
+    <td>Weighted F1</td>
+    <td>0.5471</td>
+    <td>0.6068</td>
+  </tr>
+  <tr>
+    <td>Hamming Loss</td>
+    <td>0.2097</td>
+    <td>0.2803</td>
+  </tr>
+</table>
 
-SVM Classifier:
-* Micro F1: 0.4908
-* Macro F1: 0.5719
-* Weighted F1: 0.6068
-* Hamming Loss: 0.2803
 
 After evaluating the two classifier models with LDA vector features, the SVM is determined to be better suited for the current project needs. Benefits of the Random Forest model are a lower Hamming loss, indicating that there are fewer wrong predictions per label. The model makes fewer overall mistakes as it optimizes precision over recall, making it more conservative. On the other hand, the SVM has a higher f1-macro by more than 10%, indicating better performance across all classes, including those that are underrepresented; it is more capable of capturing subtle indicators of the less common genres as well as the more common genres. The superiority of one model over another is evidently debatable and should be evaluated depending on the use case and priorities. In this situation, an SVM is the superior of the two models due to its potential to represent different classes relatively equally despite the class imbalance in the data. Since it is more logical to prioritize the presence of predictions belonging to different genre classifications over the precision of predictions, the SVM is the model that is selected in this use case. 
 
