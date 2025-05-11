@@ -1,6 +1,6 @@
 # NLP Movie Script Genre Classifier
 ### Authors: 
-Neil Azimi, 
+NEIL AZIMI, GABRIEL DOLAN, KALLEN LONBOM, MELISA LUIS
 
 ## Task 1 – Text Preprocessing & Vectorization
 ### Dataset Creation
