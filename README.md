@@ -268,5 +268,6 @@ Python Libraries
 * spacy – https://spacy.io/usage
 * time (Python standard library) – https://docs.python.org/3/library/time.html
 * tqdm – https://tqdm.github.io/
+* MultiOutputClassifier - https://scikit-learn.org/stable/modules/generated/sklearn.multioutput.MultiOutputClassifier.html 
 
 
