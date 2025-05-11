@@ -35,5 +35,55 @@ TF-IDF vectorization was implemented dynamically as part of a pipeline when trai
 ### Comparison of Classification Results by Vectorization Method
 
 ## Task 3 - Description of Dashboard
+The Movie Genre Classification Dashboard is a comprehensive web application built with Dash and Bootstrap that provides interactive visualization and analysis of movie genre classification results. Here's a structured description:
+
+Overview:
+The dashboard serves as an analytical tool for exploring and understanding movie genre classification using various machine learning approaches. It integrates multiple datasets and models to provide insights into genre prediction and classification performance.
+
+Key Features:
+
+1. Dataset Overview
+   - Displays basic dataset statistics and a preview of the movie data
+   - Shows total number of movies and available features
+
+2. Model Comparison
+   - Visualizes performance metrics across different classification methods (Doc2Vec, TF-IDF, LDA)
+   - Presents F1-Macro scores for model comparison
+   - Shows genre wise F1 scores to understand classification performance per genre
+
+3. Genre Classification Visualization
+   - Interactive SVD (Singular Value Decomposition) visualization
+   - Allows filtering by specific genres
+   - Displays movie distribution in reduced dimensionality space
+
+4. Movie Classification
+   - Interactive interface for testing movie descriptions
+   - Supports multiple classification methods
+   - Provides probability scores for different genres
+   - Shows top predicted genres for input text
+
+5. LDA Topic Analysis
+   - Visualizes topic distribution across the dataset
+   - Shows topic importance by genre
+   - Provides insights into latent themes in movie descriptions
+
+6. Movie Explorer
+   - Interactive search and filter functionality
+   - Allows filtering by multiple genres
+   - Displays detailed movie information in a sortable table
+
+7. TF-IDF Analysis
+   - Shows classification metrics (precision, recall, F1-score) by genre
+   - Allows filtering by specific genres
+   - Visualizes model performance across different metrics
+
+Technical Implementation:
+- Built using Dash framework with Bootstrap styling
+- Integrates multiple machine learning models (Doc2Vec, TF-IDF, LDA)
+- Uses Plotly for interactive visualizations
+- Implements responsive design for better user experience
+- Includes data preprocessing and model pipeline management
+
+This dashboard provides a comprehensive tool for analyzing and understanding movie genre classification, making it valuable for both technical and non-technical users interested in movie genre analysis and machine learning applications in text classification.
 
 
