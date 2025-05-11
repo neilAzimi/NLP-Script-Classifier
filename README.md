@@ -18,13 +18,55 @@ TF-IDF vectorization was implemented dynamically as part of a pipeline when trai
 
 ### Doc2Vec Vectorization
 
+This section examines Doc2Vec for representing movie scripts as numerical vectors. Doc2Vec extends Word2Vec to encode entire documents, capturing semantic relationships across the full scripts of our data set, rather than individual words. Our implementation generated 200 dimensional vectors for around 1209 movie scripts, sufficiently to generate genre classification while preserving narrative context. 
 
+< enter first image>
+To optimize our feature space, we compared Truncated SVD and PCA for dimensionality reduction of the Doc2Vec representations. Our analysis involved evaluating performances across various component thresholds (50, 100, 150).  
+
+Our comparative analysis of PCA and Truncated SVD for dimensionality reduction of movie script vectors revealed that both methods explained a similar amount of variance with the same number of components. However, SVD consistently outperformed PCA in terms of genre cohesion, with lower average distances to genre centroids in 21 out of  23 genres. The improvements were modest with the largest differences observed in niche genres like Film-Noir(2.46%) and History (0.78%). The results suggest that Truncated SVD is slightly better at preserving the distinctive linguistic patterns that characterize different movie genres, particularly for genres with highly specialized vocabulary and narrative structures. Based on these findings, we selected Truncated SVD as our method for dimensionality reduction technique for subsequent Doc2Vec analysis tasks.  
+
+< enter second image >
+
+Visualization of the first two components from both SVD and PCA reveals that genre separation is not strongly evident in these primary dimensions. The significant overlap between genres suggest that the most important dimensions of variation in movie scripts cuts across genre boundaries rather than aligning with them. This indicates that there are other factors that contribute more significantly to script variation than genre classification alone. The similar distribution patterns between SVD and PCA confirm that both methods are capturing comparable underlying structures in the data, though with slight differences in scaling and outlier treatment. The absence of clear genre clustering in these first two dimensions highlights the complex, multidimensional nature of the scripts which require more than two components to effectively characterize genre distinctions. Regardless, it is still clear that SVD reduced vectors have slightly improved genre clustering, shown in the t-SNE figure, compared to both the original vectors and PCA reduction, particularly for genres like Horror, Action, and Sci-Fi.    
+
+<enter third image>
+
+After selecting SVD as our tool for dimensionality reduction, we calculated the percentage of viance that each batch of components of the SVD provides. We found that a SVD model with 50 components explains 58.04% of variance, a SVD model with 100 components explain 79.77% of variance, and SVD model with 150 components explains 93.04% As illustrated in the image below, the cumulative explained variance curve shows that approximately 80 components capture 71.8% of the total variance in our data. This significant dimensionality reduction preserves the essential semantic structure while substantially reducing computational complexity. We also gathered insight into the variance explained by individual components. The first few components capture a disproportionately large amount of variance, with component 1 explaining over 5% of the total variance. The rapid decline in explained variance for subsequent components indicates that the most meaningful information is concentrated in the leading components. Overall, the SVD transformation maintains critical genre-indicative features while eliminating noise components, which is ideal for capturing the latent semantic structures of movie scripts.  
+
+<enter 4th image>
+<enter 5th image>
 
 ### LDA Vectorization & Topic Modeling
 
+The gensim implementation of LDA was trained using the preprocessed tokens, as well as bigram and trigram tokens, although they did not demonstrate sufficient frequency to appear in the resulting topics. The LDA model was trained on a BoW representation of the tokens with an initial quantity of 10 topics. Initially, the model’s outputted demonstrated strong signs of noise in the token data. After substantial editing to the stop-word list and token cleaning techniques, the model returned 10 categories pertaining to somewhat distinct themes. The dictionary of tokens was also filtered to exclude tokens occurring in less than 10 documents and more than 60% of the documents; these values were tuned in accordance to iterative observations made from the resulting topics. 
+
+The LDA model’s number of topics was first hypertuned by evaluating the coherence scores of model variations ranging from 3 to 20 topics. The coherence score is commonly used to evaluate LDA performance as it’s sensitive to key parameters, encourages the stability of topic assignment, and typically aligns with the human interpretability of topics. 
+
+<insert neil image 1>
+
+Following this initial round of hyperparameter tuning, a tightened range of 3 to 9 topics – for reasons of computational expense – was selected to perform further tuning on the model’s η (eta) and ɑ (alpha) values. Every combination of the n_topics, alpha, and theta was evaluated, revealing that 3 topics with symmetric alpha and theta values yielded the highest coherence score: 0.3642. However, it is important to consider that topic modeling is often observable to the human eye, making interpretation a significant decider when selecting a value for n_topics as well. Variations of the LDA model were then trained with the optimized eta and alpha values for each of 3, 4, 5 and 6 topics. The resulting topics were graphically visualized for interpretation: 
+
+#### LDA model results with topics in range (3-6)
+<image 2>
+img 3
+img 4
+img 5
+
+Although visually judging the cohesion of topics is subjective by nature, it is important to observe that the 6-topic model displays slightly finer genres compared to the other variations of the model. The 3-topic model is generally too broad to demonstrate any specific thematic ideas, and the 5-topic model actually illustrates minor redundancies. The 4-topic model seems to capture four thematic varieties, but it’s cohesion score is significantly lower than that of it’s counterparts. The 6-topic model demonstrates a cohesion score among the higher range of the models and visually represents six distinct thematic combinations. Although subjective, the team hypothesizes the following themes:
+
+#### Hypothesized thematic ideas by topic number 
+* 0: Drama, family
+* 1: Drama, scandalous
+* 2: Drama, love story, medieval
+* 3: Action, accident
+* 4: Adventure, outdoors, war 
+* 5: Action, thriller, heist, crime, sci-fi
+
+After a visual inspection of cohesion between detailed thematic elements and a superior quantitative cohesion score of 0.38, the 6-topic LDA model was selected to represent the processed movie script tokens in the dataset. 
+
 ## Task 2 - Classification Model
 
-### Classification  Methodologies
+### Classification Methodologies
 
 #### TF-IDF Method
 
@@ -33,6 +75,7 @@ TF-IDF vectorization was implemented dynamically as part of a pipeline when trai
 #### LDA Method
 
 ### Comparison of Classification Results by Vectorization Method
+
 
 ## Task 3 - Description of Dashboard
 The Movie Genre Classification Dashboard is a comprehensive web application built with Dash and Bootstrap that provides interactive visualization and analysis of movie genre classification results. Here's a structured description:
