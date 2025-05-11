@@ -117,9 +117,9 @@ After evaluating the two classifier models with LDA vector features, the SVM is 
 ### Comparison of Classification Results by Vectorization Method
 
 <p align="center">
-  <img src="images/kallen/2.png" width="200"/>
-  <img src="images/melissa/7.png" width="200"/>
-  <img src="images/neil/7.png" width="200"/>
+  <img src="images/kallen/2.png" width="300"/>
+  <img src="images/melissa/7.png" width="300"/>
+  <img src="images/neil/7.png" width="300"/>
 </p>
 
 ## Task 3 - Description of Dashboard
