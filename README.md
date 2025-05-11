@@ -177,6 +177,8 @@ After evaluating the two classifier models with LDA vector features, the SVM is 
 ![Confusion Matrix](images/neil/6.png)
 Confusion matrices for each genre with final LDA classification pipeline.
 
+The confusion for each genre matrices suggest that the SVM classifies Sci-Fi very well with high True Positive rates and avoids false predictions. However, genres Comedy and Drama classifications suffer from lower true positive rates and higher false positives, suggesting that the model is overpredicting and these features might have overlap with other genres. Action and Crime also demonstrate high false positive rates, while they also have decent recall scores; the model may be overclassifying these genres as well. The classifier conclusively performs well on clear-defined genres, while it tends to struggle with genres with more overlap and subtle distinguishing features; genre-specific tuning or improved feature representation with higher dimensionality might be worthwhile further solutions to resolve these imbalances. The majority of these issues would also be benefitted by resolving the class imbalances in the dataset.
+
 ### Comparison of Classification Results by Vectorization Method
 
 <table>
