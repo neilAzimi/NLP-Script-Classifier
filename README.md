@@ -177,4 +177,26 @@ Technical Implementation:
 
 This dashboard provides a comprehensive tool for analyzing and understanding movie genre classification, making it valuable for both technical and non-technical users interested in movie genre analysis and machine learning applications in text classification.
 
+## Acknowledgements of Authorship
+Python Libraries
+* IPython – https://ipython.readthedocs.io/
+* gensim – https://radimrehurek.com/gensim/
+* google.colab – https://research.google.com/colaboratory/
+* iterstrat – https://github.com/trent-b/iterative-stratification
+* itertools (Python standard library) – https://docs.python.org/3/library/itertools.html
+* joblib – https://joblib.readthedocs.io/
+* math (Python standard library) – https://docs.python.org/3/library/math.html
+* matplotlib – https://matplotlib.org/stable/contents.html
+* nltk – https://www.nltk.org/
+* numpy – https://numpy.org/doc/
+* os (Python standard library) – https://docs.python.org/3/library/os.html
+* pandas – https://pandas.pydata.org/docs/
+* re (Python standard library) – https://docs.python.org/3/library/re.html
+* seaborn – https://seaborn.pydata.org/
+* sklearn – https://scikit-learn.org/stable/documentation.html
+* skmultilearn – http://scikit.ml/
+* spacy – https://spacy.io/usage
+* time (Python standard library) – https://docs.python.org/3/library/time.html
+* tqdm – https://tqdm.github.io/
+
 
