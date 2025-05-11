@@ -42,25 +42,25 @@ The gensim implementation of LDA was trained using the preprocessed tokens, as w
 
 The LDA model’s number of topics was first hypertuned by evaluating the coherence scores of model variations ranging from 3 to 20 topics. The coherence score is commonly used to evaluate LDA performance as it’s sensitive to key parameters, encourages the stability of topic assignment, and typically aligns with the human interpretability of topics. 
 
-<insert neil image 1>
+![LDA Topic Photo](images/neil/1.png)
 
 Following this initial round of hyperparameter tuning, a tightened range of 3 to 9 topics – for reasons of computational expense – was selected to perform further tuning on the model’s η (eta) and ɑ (alpha) values. Every combination of the n_topics, alpha, and theta was evaluated, revealing that 3 topics with symmetric alpha and theta values yielded the highest coherence score: 0.3642. However, it is important to consider that topic modeling is often observable to the human eye, making interpretation a significant decider when selecting a value for n_topics as well. Variations of the LDA model were then trained with the optimized eta and alpha values for each of 3, 4, 5 and 6 topics. The resulting topics were graphically visualized for interpretation: 
 
 #### LDA model results with topics in range (3-6)
-<image 2>
-img 3
-img 4
-img 5
+![3-topic](images/neil/2.png)
+![4-topic](images/neil/3.png)
+![5-topic](images/neil/4.png)
+![6-topic](images/neil/5.png)
 
 Although visually judging the cohesion of topics is subjective by nature, it is important to observe that the 6-topic model displays slightly finer genres compared to the other variations of the model. The 3-topic model is generally too broad to demonstrate any specific thematic ideas, and the 5-topic model actually illustrates minor redundancies. The 4-topic model seems to capture four thematic varieties, but it’s cohesion score is significantly lower than that of it’s counterparts. The 6-topic model demonstrates a cohesion score among the higher range of the models and visually represents six distinct thematic combinations. Although subjective, the team hypothesizes the following themes:
 
 #### Hypothesized thematic ideas by topic number 
-* 0: Drama, family
-* 1: Drama, scandalous
-* 2: Drama, love story, medieval
-* 3: Action, accident
-* 4: Adventure, outdoors, war 
-* 5: Action, thriller, heist, crime, sci-fi
+* 0: Drama/Crime/Family
+* 1: Drama/Love/Medieval
+* 2: Action/War/Outdoors
+* 3: Drama/Thriller/Accident
+* 4: Sci-Fi/Action/Thriller
+* 5: Drama/Family/Scandalous
 
 After a visual inspection of cohesion between detailed thematic elements and a superior quantitative cohesion score of 0.38, the 6-topic LDA model was selected to represent the processed movie script tokens in the dataset. 
 
