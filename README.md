@@ -118,8 +118,8 @@ After evaluating the two classifier models with LDA vector features, the SVM is 
 
 <p align="center">
   <img src="images/kallen/2.png" width="200"/>
-  <img src="images/melissa/.png" width="200"/>
-  <img src="images/img3.png" width="200"/>
+  <img src="images/melissa/7.png" width="200"/>
+  <img src="images/neil/7.png" width="200"/>
 </p>
 
 ## Task 3 - Description of Dashboard
