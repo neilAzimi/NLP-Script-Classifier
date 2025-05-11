@@ -117,11 +117,19 @@ Confusion matrices for each genre with final LDA classification pipeline.
 
 ### Comparison of Classification Results by Vectorization Method
 
-<p align="center">
-  <img src="images/kallen/2.png" width="300"/>
-  <img src="images/melissa/7.png" width="300"/>
-  <img src="images/neil/7.png" width="300"/>
-</p>
+<table>
+  <tr>
+    <th>TF-IDF</th>
+    <th>Doc2Vec</th>
+    <th>LDA</th>
+  </tr>
+  <tr>
+    <td><img src="images/kallen/2.png" width="300"/></td>
+    <td><img src="images/melissa/7.png" width="300"/></td>
+    <td><img src="images/neil/7.png" width="300"/></td>
+  </tr>
+</table>
+
 
 Looking at the ROC curves, we can see that all three vectorization methods perform similarly for genre classification, with generally high AUCs across most classes. However, TF-IDF shows the most consistent performance, especially for genres like Action, Sci-Fi, and Horror. Doc2Vec performs less consistently across genres, for example, achieving a high AUC for Romance but significantly lower for Comedy, suggesting sensitivity to semantic overlap or label ambiguity. LDA also performs well for thematically distinct genres like Sci-Fi and Romance but underperforms for others such as Action and Comedy, likely due to its focus on topic structure over stylistic cues. Therefore, the model utilizing the TF-IDF vectorization returns the best results of the three vectorization methods and is the method of choice for this use case. 
 
