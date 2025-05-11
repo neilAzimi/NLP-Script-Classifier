@@ -20,21 +20,22 @@ TF-IDF vectorization was implemented dynamically as part of a pipeline when trai
 
 This section examines Doc2Vec for representing movie scripts as numerical vectors. Doc2Vec extends Word2Vec to encode entire documents, capturing semantic relationships across the full scripts of our data set, rather than individual words. Our implementation generated 200 dimensional vectors for around 1209 movie scripts, sufficiently to generate genre classification while preserving narrative context. 
 
-< enter first image>
+![Doc2Vec](images/melissa/1.png)
+
 To optimize our feature space, we compared Truncated SVD and PCA for dimensionality reduction of the Doc2Vec representations. Our analysis involved evaluating performances across various component thresholds (50, 100, 150).  
 
 Our comparative analysis of PCA and Truncated SVD for dimensionality reduction of movie script vectors revealed that both methods explained a similar amount of variance with the same number of components. However, SVD consistently outperformed PCA in terms of genre cohesion, with lower average distances to genre centroids in 21 out of  23 genres. The improvements were modest with the largest differences observed in niche genres like Film-Noir(2.46%) and History (0.78%). The results suggest that Truncated SVD is slightly better at preserving the distinctive linguistic patterns that characterize different movie genres, particularly for genres with highly specialized vocabulary and narrative structures. Based on these findings, we selected Truncated SVD as our method for dimensionality reduction technique for subsequent Doc2Vec analysis tasks.  
 
-< enter second image >
+![Doc2Vec](images/melissa/2.png)
 
 Visualization of the first two components from both SVD and PCA reveals that genre separation is not strongly evident in these primary dimensions. The significant overlap between genres suggest that the most important dimensions of variation in movie scripts cuts across genre boundaries rather than aligning with them. This indicates that there are other factors that contribute more significantly to script variation than genre classification alone. The similar distribution patterns between SVD and PCA confirm that both methods are capturing comparable underlying structures in the data, though with slight differences in scaling and outlier treatment. The absence of clear genre clustering in these first two dimensions highlights the complex, multidimensional nature of the scripts which require more than two components to effectively characterize genre distinctions. Regardless, it is still clear that SVD reduced vectors have slightly improved genre clustering, shown in the t-SNE figure, compared to both the original vectors and PCA reduction, particularly for genres like Horror, Action, and Sci-Fi.    
 
-<enter third image>
+![Doc2Vec](images/melissa/3.png)
 
 After selecting SVD as our tool for dimensionality reduction, we calculated the percentage of viance that each batch of components of the SVD provides. We found that a SVD model with 50 components explains 58.04% of variance, a SVD model with 100 components explain 79.77% of variance, and SVD model with 150 components explains 93.04% As illustrated in the image below, the cumulative explained variance curve shows that approximately 80 components capture 71.8% of the total variance in our data. This significant dimensionality reduction preserves the essential semantic structure while substantially reducing computational complexity. We also gathered insight into the variance explained by individual components. The first few components capture a disproportionately large amount of variance, with component 1 explaining over 5% of the total variance. The rapid decline in explained variance for subsequent components indicates that the most meaningful information is concentrated in the leading components. Overall, the SVD transformation maintains critical genre-indicative features while eliminating noise components, which is ideal for capturing the latent semantic structures of movie scripts.  
 
-<enter 4th image>
-<enter 5th image>
+![Doc2Vec](images/melissa/4.png)
+![Doc2Vec](images/melissa/5.png)
 
 ### LDA Vectorization & Topic Modeling
 
