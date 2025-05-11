@@ -85,7 +85,6 @@ The minimal performance impacts of feature engineering and model selection sugge
 
 #### Doc2Vec Method
 ![F1 By Genre](images/melissa/6.png)
-![Table](images/melissa/m1.png)
 
 <table border="1">
   <tr>
