@@ -73,9 +73,31 @@ After a visual inspection of cohesion between detailed thematic elements and a s
 #### Doc2Vec Method
 
 #### LDA Method
+For the classification task of predicting multi-class genre labels of movie scripts based on their LDA vector representations, a Random Forest model was initially proposed. Feature selection was introduced in the form of a 6-topic LDA vector representation of each script following the selection process as described in the LDA section of the report. A higher coherence score and visual topic cohesion in the 6-topic LDA vectorization reasonably translate to stronger performance in the classification model. 
+
+Upon analyzing the distribution of the genres within the data, it becomes clear that there are certainly class imbalances present. Random Forest models provide a degree of robustness to overfitting to the majority classes due to their ensemble nature and voting mechanisms; they are also capable of capturing non-linear relationships, which can be expected in NLP tasks. Hyperparameter tuning was performed using GridSearch on values of n_estimators, max_depth, min_samples_split, min_samples_leaf and max_features. The performance metric utilized for the tuning of hyperparameters was the f1_macro score because it is the calculated average of the f1 of each separate genre; this encourages equally good performance on all genres, as opposed to sacrificing recall on less common genres to perform better on overrepresented genres. Due to the possibility of multiple class labels in this application, the Random Forest model was wrapped in a OneVsRestClassifier model as well. The hyperparameter tuning was completed using Multi-label stratified K-fold with 5 splits, preserving the proportion of each label combination across all folds and therefore encouraging consistency of the training in each fold as opposed to inconsistent label combinations between folds. 
+
+To compete with the Random Forest model, a Support Vector Machine model was also implemented with the same OneVsRestClassifier model and stratified K-fold technique. Hyperparameters were similarly tuned in accordance with the f1_macro score; these parameters consisted of the C regularization control variable, kernel type, gamma value, class_weight, and the probability boolean. The kernel types were restricted to linear and rbf kernels, avoiding polynomial kernels due to both risks of overfitting and the need for powerful computational resources. Theoretically, the SVM should be less affected by class imbalance in the data due to its dependence on support vectors as opposed to class proportions. The tunability of the C term also allows for regularization control by adjusting the misclassification and decision boundary complexity. 
+
+Random Forest Classifier:
+* Micro F1: 0.5693
+* Macro F1: 0.4873
+* Weighted F1: 0.5471
+* Hamming Loss: 0.2097
+
+SVM Classifier:
+* Micro F1: 0.4908
+* Macro F1: 0.5719
+* Weighted F1: 0.6068
+* Hamming Loss: 0.2803
+
+After evaluating the two classifier models with LDA vector features, the SVM is determined to be better suited for the current project needs. Benefits of the Random Forest model are a lower Hamming loss, indicating that there are fewer wrong predictions per label. The model makes fewer overall mistakes as it optimizes precision over recall, making it more conservative. On the other hand, the SVM has a higher f1-macro by more than 10%, indicating better performance across all classes, including those that are underrepresented; it is more capable of capturing subtle indicators of the less common genres as well as the more common genres. The superiority of one model over another is evidently debatable and should be evaluated depending on the use case and priorities. In this situation, an SVM is the superior of the two models due to its potential to represent different classes relatively equally despite the class imbalance in the data. Since it is more logical to prioritize the presence of predictions belonging to different genre classifications over the precision of predictions, the SVM is the model that is selected in this use case. 
+
+< insert confusion matrix > 
 
 ### Comparison of Classification Results by Vectorization Method
 
+< insert 1, 2, 3>
 
 ## Task 3 - Description of Dashboard
 The Movie Genre Classification Dashboard is a comprehensive web application built with Dash and Bootstrap that provides interactive visualization and analysis of movie genre classification results. Here's a structured description:
