@@ -1,4 +1,6 @@
 # NLP Movie Script Genre Classifier
+### Authors: 
+Neil Azimi, 
 
 ## Task 1 – Text Preprocessing & Vectorization
 ### Dataset Creation
@@ -135,6 +137,9 @@ The minimal performance impacts of feature engineering and model selection sugge
 After applying SVD to the Doc2Vec vectors, we implemented a comprehensive grid search to identify the optimal feature selection method and classification parameters. We explored different model architectures including linear and RBF SVMs as well as Random Forest classifiers. For the SVM models, we experimented with different regularization parameters (C values of .1, 1.0, and 10.0) while for Random Forest, we varied with both the number of estimators (100, 200) and the maximum tree depth (None, 10, and 20). This allowed us to identify that Linear SVM with C = 1.0 and F value feature selection provided the most effective combination. 
 
 Based on the grid search findings, we conducted a focused evaluation of two feature selection methods (F value and Mutual Information) across different feature counts (30, 50, 70, 100). For each combination, we calculated the aggregated feature importance scores across all genre labels to identify the most discriminative components. We found that the F value method with 50 features achieved the highest macro averaged F1 score of 0.5954 across 34 genre categories. The top performing genres included romance, comedy, myster, sci-fi, and horror. Overall, this gave us insight that our combination of a Doc2Vec, SVD, F value selection, and linear SVC pipeline effectively handles multilabel movie genre classification, even across most categories. 
+
+![Confusion Matrix](images/melissa/8.png)
+Confusion matrices for each genre with final Doc2Vec classification pipeline.
 
 #### LDA Method
 For the classification task of predicting multi-class genre labels of movie scripts based on their LDA vector representations, a Random Forest model was initially proposed. Feature selection was introduced in the form of a 6-topic LDA vector representation of each script following the selection process as described in the LDA section of the report. A higher coherence score and visual topic cohesion in the 6-topic LDA vectorization reasonably translate to stronger performance in the classification model. 
