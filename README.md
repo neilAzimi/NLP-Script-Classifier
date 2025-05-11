@@ -138,7 +138,7 @@ After applying SVD to the Doc2Vec vectors, we implemented a comprehensive grid s
 
 Based on the grid search findings, we conducted a focused evaluation of two feature selection methods (F value and Mutual Information) across different feature counts (30, 50, 70, 100). For each combination, we calculated the aggregated feature importance scores across all genre labels to identify the most discriminative components. We found that the F value method with 50 features achieved the highest macro averaged F1 score of 0.5954 across 34 genre categories. The top performing genres included romance, comedy, myster, sci-fi, and horror. Overall, this gave us insight that our combination of a Doc2Vec, SVD, F value selection, and linear SVC pipeline effectively handles multilabel movie genre classification, even across most categories. 
 
-![Confusion Matrix](images/melissa/8.png)
+![Confusion Matrix](images/melissa/9.png)
 Confusion matrices for each genre with final Doc2Vec classification pipeline.
 
 #### LDA Method
